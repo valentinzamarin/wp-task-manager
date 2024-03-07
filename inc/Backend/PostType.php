@@ -1,12 +1,12 @@
 <?php
 
-class Task_Manager_Post_Type{
+namespace TaskManager\Backend;
+use TaskManager\AbstractSingleton;
 
-    public function __construct() {
-        add_action( 'init', [ $this, 'task_manager_post_type' ] );
-    }
+defined( 'ABSPATH' ) || exit;
 
-    public function task_manager_post_type() {
+class PostType extends AbstractSingleton {
+    public function task_manager_register_post_type() {
         register_post_type( 'tasks',
             [
                 'label'                 => __( 'Tasks' ),
@@ -40,5 +40,3 @@ class Task_Manager_Post_Type{
         );
     }
 }
-
-new Task_Manager_Post_Type();
