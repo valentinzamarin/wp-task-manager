@@ -7,29 +7,26 @@ Version: 1.0
 Author: Valentin Zamarin
 */
 
+
 define( 'TASK_MANAGER_PLUGIN', __FILE__ );
 define( 'TASK_MANAGER_PLUGIN_DIR', untrailingslashit( dirname( TASK_MANAGER_PLUGIN ) ) );
 define( 'TASK_MANAGER_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 
+require_once TASK_MANAGER_PLUGIN_DIR . '/vendor/autoload.php';
 
-require_once 'task-manager-post-type.php';
-require_once 'task-manager-enqueue-scripts.php';
-require_once 'task-manager-ajax-form.php';
-require_once 'task-manager-ajax-list.php';
-require_once 'task-manager-ajax-edit.php';
-require_once 'task-manager-meta-fields.php';
+use TaskManager\TaskManager;
 
-add_shortcode( 'task_manager', 'task_manager_callback');
 
-function task_manager_callback() {
-    $task_manager = null;
-    ob_start();
-    include TASK_MANAGER_PLUGIN_DIR . '/public/task-manager-display.php';
-    $task_manager = ob_get_contents();
-    ob_end_clean();
+if ( ! function_exists( 'task_manager_init' ) ) {
+    /**
+     * Returns singleton instance of TaskManager.
+     *
+     * @return TaskManager
+     */
+    function task_manager_init(): TaskManager {
+        return TaskManager::instance();
+    }
 
-    return $task_manager;
+    task_manager_init()->init();
 }
-
-
 

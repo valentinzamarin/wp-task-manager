@@ -1,12 +1,12 @@
 <?php
 
-class Task_Manager_Meta_Fields {
-    public function __construct() {
-        add_action( 'add_meta_boxes', [ $this, 'task_manager_meta' ],  );
-        add_action( 'save_post', [ $this, 'task_manager_save_meta' ] );
-    }
+namespace TaskManager\Backend;
+use TaskManager\AbstractSingleton;
 
-    public function task_manager_meta( $post ) {
+defined( 'ABSPATH' ) || exit;
+
+class MetaFields extends AbstractSingleton{
+    public function task_manager_meta_fields( $post ) {
         add_meta_box(
             'tasks_meta',
             'Task meta fields',
@@ -47,7 +47,7 @@ class Task_Manager_Meta_Fields {
         );
     }
 
-    public function task_manager_save_meta(){
+    public function task_manager_save_meta_fields(){
         global $post;
 
         if ( empty( $_POST['tasks_nonce'] ) || ! wp_verify_nonce( $_POST['tasks_nonce'], 'tasks_action' ) ) {
@@ -71,5 +71,3 @@ class Task_Manager_Meta_Fields {
         return true;
     }
 }
-
-new Task_Manager_Meta_Fields();
