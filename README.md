@@ -15,3 +15,8 @@
 <hr>
 
 demo - http://plugins.valentinzamarin.ru/task-manager/
+
+<hr>
+
+Модифицировал первоначальный проект, перевел с чистоного JS на Vue. 
+
