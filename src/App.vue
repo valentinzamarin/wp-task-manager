@@ -34,7 +34,11 @@ export default {
   },
   methods: {
     fetchTasks() {
-      axios.get(tasks_plugin_data.api_url)
+      axios.get(tasks_plugin_data.api_url, {
+        headers: {
+          'Authorization': `Bearer ${tasks_plugin_data.jwt_token}`
+        }
+      })
           .then(response => {
             this.tasks = response.data;
           })
@@ -42,7 +46,7 @@ export default {
             console.error('Error fetching articles:', error);
           });
     },
-    addTaskToList( response ) {
+    addTaskToList(response) {
       const newTask = {
         id: response.id,
         title: response.title,
@@ -58,6 +62,10 @@ export default {
         axios.patch(tasks_plugin_data.api_url, {
           id: id,
           status: updatedStatus ? 1 : 0
+        },{
+          headers: {
+            'Authorization': `Bearer ${tasks_plugin_data.jwt_token}`
+          }
         })
             .then(response => {
               if (response.data.success) {
@@ -71,9 +79,13 @@ export default {
             });
       }
     },
-    removeTaskFromList( item, id) {
+    removeTaskFromList(item, id) {
       axios.post(tasks_plugin_data.api_delete, {
         task_id: id
+      },{
+        headers: {
+          'Authorization': `Bearer ${tasks_plugin_data.jwt_token}`
+        }
       })
           .then(response => {
             if (response.data.success) {

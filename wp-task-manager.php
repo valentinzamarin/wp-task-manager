@@ -16,10 +16,10 @@ require_once TASK_MANAGER_PLUGIN_DIR . '/vendor/autoload.php';
 
 use TaskManager\TaskManager;
 use TaskManager\PluginActivator;
+
 function task_plugin_activation() {
     PluginActivator::activate();
 }
-
 function task_plugin_deactivation() {
     PluginActivator::deactivate();
 }
@@ -39,4 +39,3 @@ if ( ! function_exists( 'task_manager_init' ) ) {
 
     task_manager_init()->init();
 }
-

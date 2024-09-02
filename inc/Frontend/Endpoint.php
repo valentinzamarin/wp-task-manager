@@ -9,21 +9,33 @@ class Endpoint extends AbstractSingleton{
         register_rest_route('task-plugin', '/tasks', array(
             'methods'  => 'GET',
             'callback' => [ $this, 'get_tasks_data' ],
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
         ));
 
         register_rest_route('task-plugin', '/tasks', array(
             'methods'  => 'POST',
             'callback' => [ $this, 'add_task_data' ],
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
         ));
 
         register_rest_route('task-plugin', '/tasks', array(
             'methods'  => 'PATCH',
             'callback' => [ $this, 'update_task_data' ],
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
         ));
 
         register_rest_route('task-plugin', '/tasks/delete', array(
             'methods'  => 'POST',
             'callback' => [ $this, 'delete_task_data' ],
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
         ));
     }
 
