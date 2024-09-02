@@ -11,9 +11,9 @@ class EnqueueScripts extends AbstractSingleton{
 
         wp_enqueue_script('tasks-scripts', TASK_MANAGER_PLUGIN_DIR_URL . '/assets/scripts/tasks.js', [], $time, true);
         wp_localize_script('tasks-scripts', 'tasks_plugin_data', array(
-            'nonce'      => wp_create_nonce('tasks_ajax'),
             'api_url'    => esc_url(rest_url('task-plugin/tasks')),
             'api_delete' => esc_url(rest_url('task-plugin/tasks/delete')),
+            'jwt_token'  => '',
         ));
 
     }

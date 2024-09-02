@@ -40,9 +40,13 @@ export default {
         return false;
       }
 
-      axios.post( tasks_plugin_data.api_url , {
+      axios.post(tasks_plugin_data.api_url, {
         task_title: taskTitle,
         task_description: taskDescription
+      }, {
+        headers: {
+          'Authorization': `Bearer ${tasks_plugin_data.jwt_token}`
+        }
       })
           .then(response => {
             this.newTaskItem( response.data );
